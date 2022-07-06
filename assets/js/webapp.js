@@ -1,9 +1,9 @@
 
-var redirect_uri = ""; // add your local machines url for webapp.html
+var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = ""; 
-var client_secret = ""; 
+var client_id = "89477f209ae54257864f98520a9135f7"; 
+var client_secret = "bde123de50164ed784bf56ffc1c05c6a"; 
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -139,6 +139,11 @@ let songList = document.querySelector('#song-list');
 function displaySongs(data){
 
 for (let i = 0; i < 5; i++){
+
+    const playlist = data.tracks.items.length;
+    let randomSong = Math.floor(Math.random() * playlist);
+
+
     const songListItem = document.createElement("div");
     const albumArt = document.createElement("img");
     const songName = document.createElement("div");
@@ -155,7 +160,6 @@ for (let i = 0; i < 5; i++){
     songPreview.setAttribute("id", "song-preview");
     playPause.setAttribute("id", "play-pause");
     playPause.textContent = "Play/Pause";
-
 
     songList.appendChild(songListItem);
     songListItem.appendChild(albumArt);
@@ -175,16 +179,19 @@ for (let i = 0; i < 5; i++){
         }
     };
 
-    console.log(data);
-    trackArt = data.tracks.items[i].track.album.images[1].url
-    trackName = data.tracks.items[i].track.name;
-    trackArtist = data.tracks.items[i].track.artists[0].name;
-    trackPreview = data.tracks.items[i].track.preview_url;
+    trackPreview = data.tracks.items[randomSong].track.preview_url;
 
-    albumArt.src = trackArt;
-    songName.textContent = trackName;
-    artistName.textContent = trackArtist;
+    albumArt.src = data.tracks.items[randomSong].track.album.images[1].url;
+    songName.textContent = data.tracks.items[randomSong].track.name;
+    artistName.textContent = data.tracks.items[randomSong].track.artists[0].name;
     songPreview.src = trackPreview;
+
+    // checks if track has preview audio, if not remove the song and rerun the loop
+    if(trackPreview === null){
+        songList.remove(songListItem);
+        i--;
+    }
+
 }
 };
 
