@@ -8,8 +8,53 @@
     <title>Document</title>
   </head>
   <body onload="onPageLoad()">
+<<<<<<< HEAD
     <input type="button" onclick="pickPlaylist()" value="Find Songs">
     <div id="song-list"></div>
+=======
+    <input type="button" onclick="refreshTrack()" value="Request Track" />
+
+    <!-- Testing Weather API Output -->
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <h2>Search by City:</h2>
+          <div class="inputgroup">
+            <input
+              type="text"
+              class="form my-3"
+              id="searchCity"
+              placeholder="Enter City Name"
+            />
+            <div class="input-group-append">
+              <button class="btn my-3" id="searchButton">Search</button>
+            </div>
+          </div>
+          <button class="btn" type="button" id="clearHistory">
+            Clear Saved Cities
+          </button>
+          <ul class="list-group"></ul>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-7 mt-4">
+          <div class="row">
+            <div class="col-12 display-all ml-2" id="currentWeather">
+              <h3
+                class="hud d-flex align-items-center justify-content-center mb-3"
+                id="currentCity"
+              ></h3>
+              <p></p>
+              <p>Temperature: <span class="current" id="temperature"></span></p>
+              <p>Humidity: <span class="current" id="humidity"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testing Weather API Output -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+>>>>>>> feature/weather
     <script src="./assets/js/webapp.js"></script>
   </body>
 </html>
