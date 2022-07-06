@@ -1,9 +1,9 @@
 
-var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
+var redirect_uri = ""; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = "89477f209ae54257864f98520a9135f7"; 
-var client_secret = "bde123de50164ed784bf56ffc1c05c6a"; 
+var client_id = ""; 
+var client_secret = ""; 
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
