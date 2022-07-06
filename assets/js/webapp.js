@@ -1,9 +1,9 @@
 
-var redirect_uri = ""; // add your local machines url for webapp.html
+var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = ""; 
-var client_secret = ""; 
+var client_id = "89477f209ae54257864f98520a9135f7"; 
+var client_secret = "bde123de50164ed784bf56ffc1c05c6a"; 
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -137,65 +137,64 @@ let count = 0;
 let songList = document.querySelector('#song-list');
 
 function displaySongs(data){
+
     console.log(data);
-for (let i = 0; i < 5; i++){
 
-    const playlist = data.tracks.items.length;
-    let randomSong = Math.floor(Math.random() * playlist);
+    for (let i = 0; i < 5; i++){
 
+        const playlist = data.tracks.items.length;
+        let randomSong = Math.floor(Math.random() * playlist);
 
-    const songListItem = document.createElement("div");
-    const albumArt = document.createElement("img");
-    const songName = document.createElement("div");
-    const artistName = document.createElement("div");
-    const trackPlayer = document.createElement("div");
-    const songPreview = document.createElement("audio");
-    const playPause = document.createElement("button");
+        const songListItem = document.createElement("div");
+        const albumArt = document.createElement("img");
+        const songName = document.createElement("div");
+        const artistName = document.createElement("div");
+        const trackPlayer = document.createElement("div");
+        const songPreview = document.createElement("audio");
+        const playPause = document.createElement("button");
 
-    songListItem.setAttribute("id", "song-list-item");
-    albumArt.setAttribute("id", "album-art");
-    songName.setAttribute("id", "song-name");
-    artistName.setAttribute("id", "artist-name");
-    trackPlayer.setAttribute("id", "track-player");
-    songPreview.setAttribute("id", "song-preview");
-    playPause.setAttribute("id", "play-pause");
-    playPause.textContent = "Play/Pause";
+        albumArt.src = data.tracks.items[randomSong].track.album.images[1].url;
+        songName.textContent = data.tracks.items[randomSong].track.name;
+        artistName.textContent = data.tracks.items[randomSong].track.artists[0].name;
 
-    songList.appendChild(songListItem);
-    songListItem.appendChild(albumArt);
-    songListItem.appendChild(songName);
-    songListItem.appendChild(artistName);
-    songListItem.appendChild(trackPlayer);
-    trackPlayer.appendChild(songPreview);
-    trackPlayer.appendChild(playPause);
-    playPause.onclick = function() {
-        if(count == 0){
-            count = 1;
-            songPreview.play();
+        songListItem.setAttribute("id", "song-list-item");
+        albumArt.setAttribute("id", "album-art");
+        songName.setAttribute("id", "song-name");
+        artistName.setAttribute("id", "artist-name");
+        trackPlayer.setAttribute("id", "track-player");
+        songPreview.setAttribute("id", "song-preview");
+        playPause.setAttribute("id", "play-pause");
+        playPause.textContent = "Play/Pause";
+
+        songList.appendChild(songListItem);
+        songListItem.appendChild(albumArt);
+        songListItem.appendChild(songName);
+        songListItem.appendChild(artistName);
+        songListItem.appendChild(trackPlayer);
+        trackPlayer.appendChild(playPause);
+        playPause.onclick = function() {
+            if(count == 0){
+                count = 1;
+                songPreview.play();
+            }
+            else{
+                count = 0;
+                songPreview.pause();
+            }
+        };
+
+        trackPreview = data.tracks.items[randomSong].track.preview_url;
+
+        if (trackPreview === null){
+            songList.removeChild(songListItem);
+            i--;
         }
         else{
-            count = 0;
-            songPreview.pause();
+            songPreview.src = trackPreview;
+            trackPlayer.appendChild(songPreview);
         }
-    };
 
-
-   trackPreview = data.tracks.items[randomSong].track.preview_url;
-
-       // checks if track has preview audio, if not remove the song and rerun the loop
-       if(trackPreview === null){
-        songList.remove(songListItem);
-        i--;
-      }
-
-    albumArt.src = data.tracks.items[randomSong].track.album.images[1].url;
-    songName.textContent = data.tracks.items[randomSong].track.name;
-    artistName.textContent = data.tracks.items[randomSong].track.artists[0].name;
-    songPreview.src = trackPreview;
-
-
-
-}
+    }
 };
 
 
