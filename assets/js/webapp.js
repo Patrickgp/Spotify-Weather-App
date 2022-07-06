@@ -1,13 +1,15 @@
 
-var redirect_uri = ""; // add your local machines url for webapp.html
+var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = ""; 
-var client_secret = ""; 
+var client_id = "89477f209ae54257864f98520a9135f7"; 
+var client_secret = "bde123de50164ed784bf56ffc1c05c6a"; 
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
-const TRACKS = "https://api.spotify.com/v1/tracks/1rDQ4oMwGJI7B4tovsBOxc?si=1cf3079642304fd2&nd=1"
+
+let playlistIdentifier = '6nxPNnmSE0d5WlplUsa5L3?si=5804055427cc4e14';
+const PLAYLIST = "https://api.spotify.com/v1/playlists/" + playlistIdentifier;
 
 
 function onPageLoad() {
@@ -107,21 +109,60 @@ function callApi(method, url, body, callback) {
   xhr.onload = callback;
 }
 
-function refreshTrack() {
-  callApi("GET", TRACKS, null, handleTrackResponse);
+function pickPlaylist(){
+
+    function refreshPlaylist() {
+        callApi("GET", PLAYLIST, null, handlePlaylistResponse);
+      }
+      
+      function handlePlaylistResponse() {
+        if (this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          displaySongs(data);
+      
+        } else if (this.status == 401) {
+      
+          refreshAccessToken();
+        } else {
+      
+          console.log(this.responseText);
+          alert(this.responseText);
+        }
+      }
+      
+    refreshPlaylist();
+};
+
+let count = 0;
+let songList = document.querySelector('#song-list');
+let albumArt = document.querySelector('#album-art');
+let songName = document.querySelector('#song-name');
+let artistName = document.querySelector('#artist-name');
+let songPreview = document.querySelector('#song-preview');
+let playPause = document.querySelector('#play-pause');
+
+function displaySongs(data){
+    console.log(data);
+    trackArt = data.tracks.items[0].track.album.images[1].url
+    trackName = data.tracks.items[0].track.name;
+    trackArtist = data.tracks.items[0].track.artists[0].name;
+    trackPreview = data.tracks.items[0].track.preview_url;
+
+    albumArt.src = trackArt;
+    songName.textContent = trackName;
+    artistName.textContent = trackArtist;
+    songPreview.src = trackPreview;
 }
 
-function handleTrackResponse() {
-  if (this.status == 200) {
-    var data = JSON.parse(this.responseText);
-    console.log(data);
+// function plays and pauses audio preview when user presses play pause button
+function playPauseHandler(){
 
-  } else if (this.status == 401) {
-
-    refreshAccessToken();
-  } else {
-
-    console.log(this.responseText);
-    alert(this.responseText);
-  }
+    if(count == 0){
+        count = 1;
+        songPreview.play();
+    }
+    else{
+        count = 0;
+        songPreview.pause();
+    }
 }
