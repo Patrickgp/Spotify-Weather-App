@@ -1,9 +1,9 @@
 
-var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
+var redirect_uri = ""; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = "89477f209ae54257864f98520a9135f7"; 
-var client_secret = "bde123de50164ed784bf56ffc1c05c6a"; 
+var client_id = ""; 
+var client_secret = ""; 
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -138,6 +138,8 @@ let songList = document.querySelector('#song-list');
 
 function displaySongs(data){
 
+for (let i = 0; i < 5; i++){
+    const songListItem = document.createElement("div");
     const albumArt = document.createElement("img");
     const songName = document.createElement("div");
     const artistName = document.createElement("div");
@@ -145,7 +147,7 @@ function displaySongs(data){
     const songPreview = document.createElement("audio");
     const playPause = document.createElement("button");
 
-
+    songListItem.setAttribute("id", "song-list-item");
     albumArt.setAttribute("id", "album-art");
     songName.setAttribute("id", "song-name");
     artistName.setAttribute("id", "artist-name");
@@ -155,10 +157,11 @@ function displaySongs(data){
     playPause.textContent = "Play/Pause";
 
 
-    songList.appendChild(albumArt);
-    songList.appendChild(songName);
-    songList.appendChild(artistName);
-    songList.appendChild(trackPlayer);
+    songList.appendChild(songListItem);
+    songListItem.appendChild(albumArt);
+    songListItem.appendChild(songName);
+    songListItem.appendChild(artistName);
+    songListItem.appendChild(trackPlayer);
     trackPlayer.appendChild(songPreview);
     trackPlayer.appendChild(playPause);
     playPause.onclick = function() {
@@ -173,16 +176,16 @@ function displaySongs(data){
     };
 
     console.log(data);
-    trackArt = data.tracks.items[0].track.album.images[1].url
-    trackName = data.tracks.items[0].track.name;
-    trackArtist = data.tracks.items[0].track.artists[0].name;
-    trackPreview = data.tracks.items[0].track.preview_url;
+    trackArt = data.tracks.items[i].track.album.images[1].url
+    trackName = data.tracks.items[i].track.name;
+    trackArtist = data.tracks.items[i].track.artists[0].name;
+    trackPreview = data.tracks.items[i].track.preview_url;
 
     albumArt.src = trackArt;
     songName.textContent = trackName;
     artistName.textContent = trackArtist;
     songPreview.src = trackPreview;
-
 }
+};
 
 
