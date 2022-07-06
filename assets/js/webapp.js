@@ -135,13 +135,43 @@ function pickPlaylist(){
 
 let count = 0;
 let songList = document.querySelector('#song-list');
-let albumArt = document.querySelector('#album-art');
-let songName = document.querySelector('#song-name');
-let artistName = document.querySelector('#artist-name');
-let songPreview = document.querySelector('#song-preview');
-let playPause = document.querySelector('#play-pause');
 
 function displaySongs(data){
+
+    const albumArt = document.createElement("img");
+    const songName = document.createElement("div");
+    const artistName = document.createElement("div");
+    const trackPlayer = document.createElement("div");
+    const songPreview = document.createElement("audio");
+    const playPause = document.createElement("button");
+
+
+    albumArt.setAttribute("id", "album-art");
+    songName.setAttribute("id", "song-name");
+    artistName.setAttribute("id", "artist-name");
+    trackPlayer.setAttribute("id", "track-player");
+    songPreview.setAttribute("id", "song-preview");
+    playPause.setAttribute("id", "play-pause");
+    playPause.textContent = "Play/Pause";
+
+
+    songList.appendChild(albumArt);
+    songList.appendChild(songName);
+    songList.appendChild(artistName);
+    songList.appendChild(trackPlayer);
+    trackPlayer.appendChild(songPreview);
+    trackPlayer.appendChild(playPause);
+    playPause.onclick = function() {
+        if(count == 0){
+            count = 1;
+            songPreview.play();
+        }
+        else{
+            count = 0;
+            songPreview.pause();
+        }
+    };
+
     console.log(data);
     trackArt = data.tracks.items[0].track.album.images[1].url
     trackName = data.tracks.items[0].track.name;
@@ -152,17 +182,7 @@ function displaySongs(data){
     songName.textContent = trackName;
     artistName.textContent = trackArtist;
     songPreview.src = trackPreview;
+
 }
 
-// function plays and pauses audio preview when user presses play pause button
-function playPauseHandler(){
 
-    if(count == 0){
-        count = 1;
-        songPreview.play();
-    }
-    else{
-        count = 0;
-        songPreview.pause();
-    }
-}
