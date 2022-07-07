@@ -126,6 +126,7 @@ function pickPlaylist(playlistIdentifier) {
 }
 
 let count = 0;
+let refreshList = 0;
 let songList = document.querySelector("#song-list");
 
 function displaySongs(data) {
@@ -178,11 +179,24 @@ function displaySongs(data) {
     if (trackPreview === null) {
       songList.removeChild(songListItem);
       i--;
-    } else {
+    } 
+    else {
+      if (refreshList > 0){
+        //songList.removeChild(songListItem);
+        songList.removeChild(songList.firstElementChild);
+        console.log("child");
+      }
       songPreview.src = trackPreview;
       trackPlayer.appendChild(songPreview);
     }
+
+
+
   }
+
+  refreshList++;
+  return songListItem;
+
 }
 
 // OPENWEATHER API
@@ -200,9 +214,9 @@ var currentHumidity = $("#humidity");
 var savedCities = [];
 
 // This loop searches the city to see if it exists in the "saved city search"
-function find(c) {
+function find(city) {
   for (var i = 0; i < savedCities.length; i++) {
-    if (c.toUpperCase() === savedCities[i]) {
+    if (city.toUpperCase() === savedCities[i]) {
       return -1;
     }
   }
@@ -249,16 +263,16 @@ function currentWeather(city) {
     $(currentHumidity).html(response.list[0].main.humidity + "%");
 
     if (response.cod == 200) {
-      savedCitiies = JSON.parse(localStorage.getItem("cityname"));
-      if (savedCitiies == null) {
-        savedCitiies = [];
-        savedCitiies.push(city.toUpperCase());
-        localStorage.setItem("cityname", JSON.stringify(savedCitiies));
+      savedCities = JSON.parse(localStorage.getItem("cityname"));
+      if (savedCities == null) {
+        savedCities = [];
+        savedCities.push(city.toUpperCase());
+        localStorage.setItem("cityname", JSON.stringify(savedCities));
         addToList(city);
       } else {
         if (find(city) > 0) {
-          savedCitiies.push(city.toUpperCase());
-          localStorage.setItem("cityname", JSON.stringify(savedCitiies));
+          savedCities.push(city.toUpperCase());
+          localStorage.setItem("cityname", JSON.stringify(savedCities));
           addToList(city);
         }
       }
