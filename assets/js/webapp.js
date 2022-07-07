@@ -1,8 +1,8 @@
-var redirect_uri = ""; // add your local machines url for webapp.html
+var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = "";
-var client_secret = "";
+var client_id = "89477f209ae54257864f98520a9135f7";
+var client_secret = "bde123de50164ed784bf56ffc1c05c6a";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -248,8 +248,6 @@ function currentWeather(city) {
     $(currentTemperature).html(temp.toFixed(2) + "&#8457");
     $(currentHumidity).html(response.list[0].main.humidity + "%");
 
-    pickWeatherSong(response);
-
     if (response.cod == 200) {
       savedCitiies = JSON.parse(localStorage.getItem("cityname"));
       if (savedCitiies == null) {
@@ -265,6 +263,7 @@ function currentWeather(city) {
         }
       }
     }
+    pickWeatherSong(response);
   });
 }
 
@@ -305,6 +304,8 @@ function clearHistory(event) {
   savedCities = [];
   localStorage.removeItem("cityname");
   document.location.reload();
+  location.href = '../../index.html';
+  
 }
 
 // Tie weather condition with playlist options
@@ -334,12 +335,18 @@ function pickWeatherSong(response) {
     console.log(weathercondition);
     let playlistIdentifier = "37i9dQZF1DX6ALfRKlHn1t?si=064ed72681e64618";
     pickPlaylist(playlistIdentifier);
-  } else playlistIdentifier = "62wW67yRcDrZunRQlgzsqU?si=15e7275936c949ea";
+  } else {
+    let playlistIdentifier = "62wW67yRcDrZunRQlgzsqU?si=15e7275936c949ea"
+    pickPlaylist(playlistIdentifier);
+  };
+  
+  
 
-  pickPlaylist(playlistIdentifier);
 }
 
 $("#searchButton").on("click", displayWeather);
 $(document).on("click", pastSearch);
 $(window).on("load", previousCity);
 $("#clearHistory").on("click", clearHistory);
+
+onPageLoad();
