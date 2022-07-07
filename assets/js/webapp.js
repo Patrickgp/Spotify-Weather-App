@@ -1,13 +1,14 @@
-var redirect_uri = ""; // add your local machines url for webapp.html
+var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = "";
-var client_secret = "";
+var client_id = "01b7c0e323ad420d92642e02a58fc217";
+var client_secret = "7578aff23ba44f92b111a9e49466abfe";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
 
-let playlistIdentifier = "6nxPNnmSE0d5WlplUsa5L3?si=5804055427cc4e14";
+// Array Order: 1st
+let playlistIdentifier = ["6nxPNnmSE0d5WlplUsa5L3?si=5804055427cc4e14"];
 const PLAYLIST = "https://api.spotify.com/v1/playlists/" + playlistIdentifier;
 
 function onPageLoad() {
@@ -249,6 +250,9 @@ function currentWeather(city) {
     var temp = response.list[0].main.temp;
     $(currentTemperature).html(temp.toFixed(2) + "&#8457");
     $(currentHumidity).html(response.list[0].main.humidity + "%");
+
+    pickWeatherSong(response);
+
     if (response.cod == 200) {
       savedCitiies = JSON.parse(localStorage.getItem("cityname"));
       if (savedCitiies == null) {
@@ -304,6 +308,30 @@ function clearHistory(event) {
   savedCities = [];
   localStorage.removeItem("cityname");
   document.location.reload();
+}
+
+// Tie weather condition with playlist options
+function pickWeatherSong(response) {
+  var weathercondition = response.list[0].weather[0].main;
+  if (weathercondition == "Thunderstorm") {
+    console.log(weathercondition);
+    playlistIdentifier === "37i9dQZF1DX8sGALGjOrTu?si=a6b5190c40564e92";
+  } else if (weathercondition == "Drizzle") {
+    console.log(weathercondition);
+    playlistIdentifier === "0vvXsWCC9xrXsKd4FyS8kM?si=62e880870c9243c8";
+  } else if (weathercondition == "Rain") {
+    console.log(weathercondition);
+    playlistIdentifier === "2gfqKlN3egeoGpY9ht06Av?si=25795cf6746e4cd4";
+  } else if (weathercondition == "Snow") {
+    console.log(weathercondition);
+    playlistIdentifier === "5l6rFyXN63iINVsbaBObag?si=a6bdf02e357c497e";
+  } else if (weathercondition == "Clear") {
+    console.log(weathercondition);
+    playlistIdentifier === "5jKkHPUXGZHitWujNXQREE?si=2fc0da716e214daa";
+  } else if (weathercondition == "Clouds") {
+    console.log(weathercondition);
+    playlistIdentifier === "37i9dQZF1DX6ALfRKlHn1t?si=064ed72681e64618";
+  } else playlistIdentifier === "62wW67yRcDrZunRQlgzsqU?si=15e7275936c949ea";
 }
 
 $("#searchButton").on("click", displayWeather);
