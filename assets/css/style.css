@@ -13,6 +13,27 @@ body {
   overflow-x: hidden;
 }
 
+h1 {
+  margin: 0;
+  padding: 15px;
+  color: var(--main-text-color);
+  font-weight: bold;
+}
+
+.flow {
+  color: var(--secondary-text-color);
+  position: absolute;
+  top: 50px;
+}
+
+.bg-img {
+  height: 100vh;
+  background: url(/assets/images/listening.jpeg);
+  background-size: cover;
+  background-position: 10% 50%;
+  background-repeat: no-repeat;
+}
+
 .display-all {
   background-color: var(--tertiary-bg-color);
   border-radius: 25px;
@@ -36,6 +57,26 @@ body {
   background-color: #3e3e3e;
   border: 2px solid var(--secondary-text-color);
   border-radius: 25px;
+  color: var(--secondary-text-color);
+  cursor: pointer;
+}
+
+.cta {
+  font-size: 64px;
+  font-weight: bold;
+  color: var(--secondary-text-color);
+  position: absolute;
+  top: 35vh;
+  left: 60vw;
+}
+
+.sign-in {
+  width: 150px;
+  height: 50px;
+  font-size: 16pt;
+  position: absolute;
+  top: 65vh;
+  left: 72vw;
 }
 
 .current {
@@ -79,6 +120,6 @@ body {
   border-radius: 25%;
   justify-content: center;
   align-items: flex-end;
-  margin-left: 310px;
+  margin-left: 450px;
   margin-top: 10px;
 }
