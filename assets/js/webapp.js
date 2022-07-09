@@ -1,8 +1,8 @@
 var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = "89477f209ae54257864f98520a9135f7";
-var client_secret = "bde123de50164ed784bf56ffc1c05c6a";
+var client_id = "01b7c0e323ad420d92642e02a58fc217";
+var client_secret = "7578aff23ba44f92b111a9e49466abfe";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -179,9 +179,8 @@ function displaySongs(data) {
     if (trackPreview === null) {
       songList.removeChild(songListItem);
       i--;
-    } 
-    else {
-      if (refreshList > 0){
+    } else {
+      if (refreshList > 0) {
         //songList.removeChild(songListItem);
         songList.removeChild(songList.firstElementChild);
         console.log("child");
@@ -189,14 +188,10 @@ function displaySongs(data) {
       songPreview.src = trackPreview;
       trackPlayer.appendChild(songPreview);
     }
-
-
-
   }
 
   refreshList++;
   return songListItem;
-
 }
 
 // OPENWEATHER API
@@ -209,7 +204,9 @@ var searchCity = $("#searchCity");
 var searchButton = $("#searchButton");
 var clearButton = $("#clearHistory");
 var currentCity = $("#currentCity");
+var currentWeatherIcon = $("#icon");
 var currentTemperature = $("#temperature");
+var currentWeatherConditions = $("#weatherCondition");
 var currentHumidity = $("#humidity");
 var savedCities = [];
 
@@ -247,6 +244,7 @@ function currentWeather(city) {
         response.list[(i + 1) * 8 - 1].dt * 1000
       ).toLocaleDateString();
       var temp = response.list[(i + 1) * 8 - 1].main.temp_max;
+      var weatherCondition = response.list[0].weather[0].main;
       var humidity = response.list[(i + 1) * 8 - 1].main.humidity;
       var iconcode = response.list[(i + 1) * 8 - 1].weather[0].icon;
       var iconurl = `http://openweathermap.org/img/wn/${iconcode}.png`;
@@ -257,10 +255,12 @@ function currentWeather(city) {
     var weatherIcon = response.list[0].weather[0].icon;
     var iconurl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
     var date = new Date(response.list[0].dt * 1000).toLocaleDateString();
-    $(currentCity).html(response.city.name + "<img src=" + iconurl + ">");
+    $(currentCity).html(response.city.name);
     var temp = response.list[0].main.temp;
+    $(currentWeatherIcon).html("<img src=" + iconurl + ">");
     $(currentTemperature).html(temp.toFixed(2) + "&#8457");
     $(currentHumidity).html(response.list[0].main.humidity + "%");
+    $(currentWeatherConditions).html(weatherCondition);
 
     if (response.cod == 200) {
       savedCities = JSON.parse(localStorage.getItem("cityname"));
@@ -318,8 +318,7 @@ function clearHistory(event) {
   savedCities = [];
   localStorage.removeItem("cityname");
   document.location.reload();
-  location.href = '../../index.html';
-  
+  location.href = "../../index.html";
 }
 
 // Tie weather condition with playlist options
@@ -350,12 +349,9 @@ function pickWeatherSong(response) {
     let playlistIdentifier = "37i9dQZF1DX6ALfRKlHn1t?si=064ed72681e64618";
     pickPlaylist(playlistIdentifier);
   } else {
-    let playlistIdentifier = "62wW67yRcDrZunRQlgzsqU?si=15e7275936c949ea"
+    let playlistIdentifier = "62wW67yRcDrZunRQlgzsqU?si=15e7275936c949ea";
     pickPlaylist(playlistIdentifier);
-  };
-  
-  
-
+  }
 }
 
 $("#searchButton").on("click", displayWeather);

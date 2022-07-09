@@ -4,52 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Document</title>
   </head>
   <body onload="onPageLoad()">
-    <input type="button" onclick="pickPlaylist()" value="Find Songs" />
-    <div id="song-list"></div>
-
-    <!-- Testing Weather API Output -->
-    <div class="container">
+    <!-- Weather API Output -->
+    <div class="container left-align">
       <div class="row">
-        <div class="col-4">
-          <h2>Search by City:</h2>
-          <div class="inputgroup">
-            <input
-              type="text"
-              class="form my-3"
-              id="searchCity"
-              placeholder="Enter City Name"
-            />
-            <div class="input-group-append">
-              <button class="btn my-3" id="searchButton">Search</button>
+        <div class="col s4 valign-wrapper">
+          <div id="currentWeather">
+            <div class="display-all">
+              <h3 class="center-align" id="currentCity"></h3>
+              <div class="col s6 center-align">
+                <p><span id="icon"></span></p>
+              </div>
+              <div class="col s6 center-align">
+                <p><span class="current" id="temperature"></span></p>
+                <p><span class="current" id="weatherCondition"></span></p>
+              </div>
             </div>
-          </div>
-          <button class="btn" type="button" id="clearHistory">
-            Clear Saved Cities
-          </button>
-          <ul class="list-group"></ul>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-7 mt-4">
-          <div class="row">
-            <div class="col-12 display-all ml-2" id="currentWeather">
-              <h3
-                class="hud d-flex align-items-center justify-content-center mb-3"
-                id="currentCity"
-              ></h3>
-              <p></p>
-              <p>Temperature: <span class="current" id="temperature"></span></p>
-              <p>Humidity: <span class="current" id="humidity"></span></p>
+            <h4 class="left">Search by City:</h4>
+            <div class="inputgroup">
+              <input
+                type="text"
+                class="form"
+                id="searchCity"
+                placeholder="Enter City Name"
+              />
+              <div class="input-group-append">
+                <button class="btn" id="searchButton">Search</button>
+                <button class="btn" type="button" id="clearHistory">
+                  Clear Saved Cities
+                </button>
+                <ul class="list-group"></ul>
+              </div>
             </div>
           </div>
         </div>
+        <!-- Playlist Album Output -->
+        <div class="col s8 center-align secondBackground">
+          <div id="song-list"></div>
+        </div>
+        <!-- Playlist Album Output -->
       </div>
+      <!-- Media FIND BUTTON -->
+      <!-- <input type="button" onclick="pickPlaylist()" value="Find Songs" /> -->
     </div>
+    <!-- Weather API Output -->
 
-    <!-- Testing Weather API Output -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="./assets/js/webapp.js"></script>
   </body>
