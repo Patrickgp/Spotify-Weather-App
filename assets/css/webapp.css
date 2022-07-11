@@ -27,3 +27,33 @@ body {
 .display-all {
   padding-bottom: 0;
 }
+
+#song-list {
+  background-color: var(--secondary-bg-color);
+  color: white;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+#song-list-item {
+  display: flex;
+  border-bottom: black solid 1px;
+  margin: 0;
+  padding: 10px 0;
+}
+#song-list-item img {
+  height: 100px;
+}
+#song-name {
+  font-size: x-large;
+}
+#artist-name {
+  align-items: flex-start;
+}
+#play-pause {
+  height: 75px;
+  border-radius: 25%;
+  justify-content: center;
+  align-items: flex-end;
+}

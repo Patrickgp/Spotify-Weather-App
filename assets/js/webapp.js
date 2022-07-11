@@ -4,6 +4,9 @@ var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machin
 var client_id = "01b7c0e323ad420d92642e02a58fc217";
 var client_secret = "7578aff23ba44f92b111a9e49466abfe";
 
+var access_token = null;
+var refresh_token = null;
+
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
 
@@ -27,7 +30,7 @@ function fetchAccessToken(code) {
   body += "&code=" + code;
   body += "&redirect_uri=" + encodeURI(redirect_uri);
   body += "&client_id=" + client_id;
-  body += "&client_secr et=" + client_secret;
+  body += "&client_secret=" + client_secret;
   callAuthorizationApi(body);
 }
 
