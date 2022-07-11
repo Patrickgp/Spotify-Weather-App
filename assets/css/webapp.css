@@ -5,7 +5,7 @@ body {
 .secondBackground {
   display: block;
   width: 100vw;
-  height: 130vh;
+  height: 100vh;
   background-color: var(--secondary-bg-color);
 }
 
@@ -53,12 +53,19 @@ body {
 #artist-name {
   align-items: flex-start;
 }
-#track-player {
-  width: 100vw;
-}
-#play-pause {
-  height: 75px;
-  border-radius: 25%;
-  position: relative;
-  left: -350px;
+
+@media only screen and (max-width: 400px) {
+  #play-pause {
+    height: 75px;
+    border-radius: 25%;
+    margin: 120px 0 0 0;
+  }
+
+  #song-name {
+    font-size: 1em;
+  }
+
+  .secondBackground {
+    height: 180vh;
+  }
 }
