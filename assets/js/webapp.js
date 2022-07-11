@@ -140,6 +140,7 @@ function displaySongs(data) {
     const albumArt = document.createElement("img");
     const songName = document.createElement("div");
     const artistName = document.createElement("div");
+    const songInfo = document.createElement("div");
     const trackPlayer = document.createElement("div");
     const songPreview = document.createElement("audio");
     const playPause = document.createElement("button");
@@ -150,18 +151,23 @@ function displaySongs(data) {
       data.tracks.items[randomSong].track.artists[0].name;
 
     songListItem.setAttribute("id", "song-list-item");
+    songListItem.setAttribute("class", "row");
     albumArt.setAttribute("id", "album-art");
+    albumArt.setAttribute("class", "col s3");
+    songInfo.setAttribute("class", "col s6");
     songName.setAttribute("id", "song-name");
     artistName.setAttribute("id", "artist-name");
     trackPlayer.setAttribute("id", "track-player");
     songPreview.setAttribute("id", "song-preview");
     playPause.setAttribute("id", "play-pause");
+    playPause.setAttribute("class", "col s3");
     playPause.textContent = "Play/Pause";
 
     songList.appendChild(songListItem);
     songListItem.appendChild(albumArt);
-    songListItem.appendChild(songName);
-    songListItem.appendChild(artistName);
+    songListItem.appendChild(songInfo);
+    songInfo.appendChild(songName);
+    songInfo.appendChild(artistName);
     songListItem.appendChild(trackPlayer);
     trackPlayer.appendChild(playPause);
     playPause.onclick = function () {

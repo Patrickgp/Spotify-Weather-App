@@ -9,8 +9,6 @@
 body {
   background-color: var(--main-bg-color);
   font-family: "Poppins", sans-serif;
-  overflow-y: hidden;
-  overflow-x: hidden;
 }
 
 .display-all {
@@ -30,7 +28,7 @@ body {
   height: 100vh;
   width: auto;
   background-color: var(--secondary-bg-color);
-}
+} 
 
 .btn {
   background-color: #3e3e3e;
@@ -46,11 +44,9 @@ body {
 #song-list {
   background-color: var(--secondary-bg-color);
   color: white;
-  margin-top: 100px;
 }
 
 #song-list-item {
-  display: flex;
   border: black solid 1px;
   margin: 0;
   padding: 0;
@@ -60,21 +56,8 @@ body {
 }
 #song-name {
   font-size: x-large;
-  position: absolute;
-  margin-top: 30px;
-  margin-left: 110px;
-}
-#artist-name {
-  position: relative;
-  position: absolute;
-  margin-top: 60px;
-  margin-left: 110px;
 }
 #play-pause {
   height: 75px;
   border-radius: 25%;
-  justify-content: center;
-  align-items: flex-end;
-  margin-left: 450px;
-  margin-top: 10px;
 }
