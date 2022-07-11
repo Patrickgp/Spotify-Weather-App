@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather Flow</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
   </head>
-  <body onload="onPageLoad()">
-    <input type="button" onclick="refreshTrack()" value="Request Track">
+  <body onload="onPageLoad()"> 
+    <div class="container">
+      <div class="content">
+        <h1>weather<span>Flow</span></h1>
+        <p>Let The Music Take You Away</p>
+        <input type="button" onclick="refreshTrack()" value="Request Track" id="btn">
+      </div>
+    </div>
     <script src="./assets/js/webapp.js"></script>
   </body>
 </html>
