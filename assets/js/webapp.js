@@ -1,8 +1,8 @@
 var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
-var client_id = "01b7c0e323ad420d92642e02a58fc217";
-var client_secret = "7578aff23ba44f92b111a9e49466abfe";
+var client_id = "89477f209ae54257864f98520a9135f7";
+var client_secret = "bde123de50164ed784bf56ffc1c05c6a";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -128,6 +128,7 @@ function pickPlaylist(playlistIdentifier) {
 let count = 0;
 let refreshList = 0;
 let songList = document.querySelector("#song-list");
+let previousSongs = [];
 
 function displaySongs(data) {
   console.log(data);
@@ -135,6 +136,7 @@ function displaySongs(data) {
   for (let i = 0; i < 5; i++) {
     const playlist = data.tracks.items.length;
     let randomSong = Math.floor(Math.random() * playlist);
+
 
     const songListItem = document.createElement("div");
     const albumArt = document.createElement("img");
@@ -176,7 +178,7 @@ function displaySongs(data) {
 
     trackPreview = data.tracks.items[randomSong].track.preview_url;
 
-    if (trackPreview === null) {
+    if (trackPreview === null || previousSongs.includes(randomSong)) {
       songList.removeChild(songListItem);
       i--;
     } else {
@@ -185,9 +187,11 @@ function displaySongs(data) {
         songList.removeChild(songList.firstElementChild);
         console.log("child");
       }
+      previousSongs.push(randomSong);
       songPreview.src = trackPreview;
       trackPlayer.appendChild(songPreview);
     }
+   
   }
 
   refreshList++;
