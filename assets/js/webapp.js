@@ -54,7 +54,6 @@ function callAuthorizationApi(body) {
 function handleAuthorizationResponse() {
   if (this.status == 200) {
     var data = JSON.parse(this.responseText);
-    console.log(data);
     var data = JSON.parse(this.responseText);
     if (data.access_token != undefined) {
       access_token = data.access_token;
@@ -131,7 +130,6 @@ let songList = document.querySelector("#song-list");
 let previousSongs = [];
 
 function displaySongs(data) {
-  console.log(data);
 
   for (let i = 0; i < 5; i++) {
     const playlist = data.tracks.items.length;
@@ -178,6 +176,7 @@ function displaySongs(data) {
 
     trackPreview = data.tracks.items[randomSong].track.preview_url;
 
+    // checks if song preview exists and if song has already been selected previously
     if (trackPreview === null || previousSongs.includes(randomSong)) {
       songList.removeChild(songListItem);
       i--;
@@ -185,7 +184,6 @@ function displaySongs(data) {
       if (refreshList > 0) {
         //songList.removeChild(songListItem);
         songList.removeChild(songList.firstElementChild);
-        console.log("child");
       }
       previousSongs.push(randomSong);
       songPreview.src = trackPreview;
@@ -253,7 +251,6 @@ function currentWeather(city) {
       var iconcode = response.list[(i + 1) * 8 - 1].weather[0].icon;
       var iconurl = `http://openweathermap.org/img/wn/${iconcode}.png`;
     }
-    console.log(response);
     var lat = response.city.coord.lat;
     var lon = response.city.coord.lon;
     var weatherIcon = response.list[0].weather[0].icon;
@@ -329,27 +326,21 @@ function clearHistory(event) {
 function pickWeatherSong(response) {
   var weathercondition = response.list[0].weather[0].main;
   if (weathercondition == "Thunderstorm") {
-    console.log(weathercondition);
     let playlistIdentifier = "37i9dQZF1DX8sGALGjOrTu?si=a6b5190c40564e92";
     pickPlaylist(playlistIdentifier);
   } else if (weathercondition == "Drizzle") {
-    console.log(weathercondition);
     let playlistIdentifier = "0vvXsWCC9xrXsKd4FyS8kM?si=62e880870c9243c8";
     pickPlaylist(playlistIdentifier);
   } else if (weathercondition == "Rain") {
-    console.log(weathercondition);
     let playlistIdentifier = "2gfqKlN3egeoGpY9ht06Av?si=25795cf6746e4cd4";
     pickPlaylist(playlistIdentifier);
   } else if (weathercondition == "Snow") {
-    console.log(weathercondition);
     let playlistIdentifier = "5l6rFyXN63iINVsbaBObag?si=a6bdf02e357c497e";
     pickPlaylist(playlistIdentifier);
   } else if (weathercondition == "Clear") {
-    console.log(weathercondition);
     let playlistIdentifier = "5jKkHPUXGZHitWujNXQREE?si=2fc0da716e214daa";
     pickPlaylist(playlistIdentifier);
   } else if (weathercondition == "Clouds") {
-    console.log(weathercondition);
     let playlistIdentifier = "37i9dQZF1DX6ALfRKlHn1t?si=064ed72681e64618";
     pickPlaylist(playlistIdentifier);
   } else {
