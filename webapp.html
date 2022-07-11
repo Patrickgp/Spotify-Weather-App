@@ -15,7 +15,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Document</title>
+    <link
+      rel="stylesheet"
+      media="(max-width: 820px)"
+      href="./assets/css/webapp.css"
+    />
+    <title>weatherFlow</title>
   </head>
   <body onload="onPageLoad()">
     <!-- Weather API Output -->
@@ -29,8 +34,10 @@
                 <p><span id="icon"></span></p>
               </div>
               <div class="col s6 center-align">
-                <p><span class="current" id="temperature"></span></p>
-                <p><span class="current" id="weatherCondition"></span></p>
+                <p><span class="center-align" id="weatherCondition"></span></p>
+                <p>
+                  <span class="current center-align" id="temperature"></span>
+                </p>
               </div>
             </div>
             <h4 class="left">Search by City:</h4>
@@ -44,7 +51,7 @@
               <div class="input-group-append">
                 <button class="btn" id="searchButton">Search</button>
                 <button class="btn" type="button" id="clearHistory">
-                  Clear Saved Cities
+                  Clear
                 </button>
                 <ul class="list-group"></ul>
               </div>
