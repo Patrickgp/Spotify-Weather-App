@@ -4,7 +4,8 @@ body {
 
 .secondBackground {
   display: block;
-  width: 100%;
+  width: 100vw;
+  height: 130vh;
   background-color: var(--secondary-bg-color);
 }
 
@@ -19,7 +20,6 @@ body {
 
 .row .col.s8 {
   width: 100%;
-  height: 60vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -31,29 +31,34 @@ body {
 #song-list {
   background-color: var(--secondary-bg-color);
   color: white;
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
 }
 
 #song-list-item {
   display: flex;
+  flex-wrap: wrap;
   border-bottom: black solid 1px;
   margin: 0;
   padding: 10px 0;
 }
+
 #song-list-item img {
   height: 100px;
 }
 #song-name {
-  font-size: x-large;
+  font-size: 1.3em;
 }
 #artist-name {
   align-items: flex-start;
 }
+#track-player {
+  width: 100vw;
+}
 #play-pause {
   height: 75px;
   border-radius: 25%;
-  justify-content: center;
-  align-items: flex-end;
+  position: relative;
+  left: -350px;
 }
