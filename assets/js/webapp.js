@@ -1,4 +1,5 @@
-var redirect_uri = "http://127.0.0.1:5500/webapp.html"; // add your local machines url for webapp.html
+var redirect_uri =
+  "https://patrickgp.github.io/Spotify-Weather-App/webapp.html"; // add your local machines url for webapp.html
 
 // add spotify developer credintials here
 var client_id = "01b7c0e323ad420d92642e02a58fc217";
