@@ -320,7 +320,7 @@ function clearHistory(event) {
   savedCities = [];
   localStorage.removeItem("cityname");
   document.location.reload();
-  location.href = ".https://patrickgp.github.io/Spotify-Weather-App/";
+  location.href = "";
 }
 
 // Tie weather condition with playlist options
