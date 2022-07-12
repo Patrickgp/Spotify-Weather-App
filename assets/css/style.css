@@ -28,7 +28,7 @@ h1 {
 
 .bg-img {
   height: 100vh;
-  background: url(../assets/images/listening.jpeg);
+  background: url(../images/listening.jpeg);
   background-size: cover;
   background-position: 10% 50%;
   background-repeat: no-repeat;
