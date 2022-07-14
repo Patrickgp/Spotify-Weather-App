@@ -15,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- This stylesheet handles styling when the width of the users screen is 820px or below -->
     <link
       rel="stylesheet"
       media="(max-width: 820px)"
@@ -23,6 +24,7 @@
     <title>weatherFlow</title>
   </head>
   <body onload="onPageLoad()">
+    <!-- Function tied to onload of body element -->
     <!-- Weather API Output -->
     <div class="container left-align">
       <div class="row">
@@ -32,6 +34,7 @@
               <h3 class="center-align" id="currentCity"></h3>
               <div class="col s6 center-align">
                 <p><span id="icon"></span></p>
+                <!-- will display icon of weather dynamically generated through js -->
               </div>
               <div class="col s6 center-align">
                 <p><span class="center-align" id="weatherCondition"></span></p>
@@ -64,8 +67,8 @@
         </div>
         <!-- Playlist Album Output -->
       </div>
-      <!-- Media FIND BUTTON -->
-      <!-- <input type="button" onclick="pickPlaylist()" value="Find Songs" /> -->
+      <!-- outdated: Media FIND BUTTON -->
+      <!-- < outdated: input type="button" onclick="pickPlaylist()" value="Find Songs" /> -->
     </div>
     <!-- Weather API Output -->
 

@@ -5,12 +5,15 @@ var redirect_uri =
 var client_id = "01b7c0e323ad420d92642e02a58fc217";
 var client_secret = "7578aff23ba44f92b111a9e49466abfe";
 
+// establishing access and refresh token globally
 var access_token = null;
 var refresh_token = null;
 
+// base url's that are built dynamically through JS
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
 
+// when the page is loaded client id/secret are stored locally and the user is sent to our redirect uri
 function onPageLoad() {
   localStorage.setItem("client_id", client_id);
   localStorage.setItem("client_secret", client_secret);
@@ -19,13 +22,14 @@ function onPageLoad() {
     handleRedirect();
   }
 }
-
+// we handle the redirect and at the same time fetch our access tokens by passing parameters through our api
 function handleRedirect() {
   let code = getCode();
   fetchAccessToken(code);
   window.history.pushState("", "", redirect_uri);
 }
 
+// we handle the redirect and at the same time fetch our access tokens by passing parameters through our api
 function fetchAccessToken(code) {
   let body = "grant_type=authorization_code";
   body += "&code=" + code;
@@ -35,6 +39,7 @@ function fetchAccessToken(code) {
   callAuthorizationApi(body);
 }
 
+// we handle the redirect and at the same time fetch our access tokens by passing parameters through our api
 function refreshAccessToken() {
   refresh_token = localStorage.getItem("refresh_token");
   let body = "grant_type=refresh_token";
@@ -43,6 +48,7 @@ function refreshAccessToken() {
   callAuthorizationApi(body);
 }
 
+// we handle the redirect and at the same time fetch our access tokens by passing parameters through our api
 function callAuthorizationApi(body) {
   let xhr = new XMLHttpRequest();
   xhr.open("POST", TOKEN, true);
@@ -55,6 +61,7 @@ function callAuthorizationApi(body) {
   xhr.onload = handleAuthorizationResponse;
 }
 
+// This function allows us to overcome status codes outside of the 200 range and will refresh the token which can be the primary cause of an error.
 function handleAuthorizationResponse() {
   if (this.status == 200) {
     var data = JSON.parse(this.responseText);
@@ -74,6 +81,7 @@ function handleAuthorizationResponse() {
   }
 }
 
+// This function strips the access code from the URL returned.
 function getCode() {
   let code = null;
   const queryString = window.location.search;
@@ -84,6 +92,7 @@ function getCode() {
   return code;
 }
 
+// This function allows us to receive access to users private information
 function requestAuthorization() {
   localStorage.setItem("client_id", client_id);
   localStorage.setItem("client_secret", client_secret);
@@ -98,6 +107,7 @@ function requestAuthorization() {
   window.location.href = url;
 }
 
+// This function allows us to request certain responses from our API
 function callApi(method, url, body, callback) {
   let xhr = new XMLHttpRequest();
   xhr.open(method, url, true);
@@ -107,6 +117,7 @@ function callApi(method, url, body, callback) {
   xhr.onload = callback;
 }
 
+// This function will allow us to pull playlists from the API we are setting playlistIdentifier to multiple playlists.
 function pickPlaylist(playlistIdentifier) {
   const PLAYLIST = "https://api.spotify.com/v1/playlists/" + playlistIdentifier;
   function refreshPlaylist() {
@@ -128,11 +139,13 @@ function pickPlaylist(playlistIdentifier) {
   refreshPlaylist();
 }
 
+// Song's are provided and placed onto the web app dynamically
 let count = 0;
 let refreshList = 0;
 let songList = document.querySelector("#song-list");
 let previousSongs = [];
 
+// The songs are randomly displayed from the playlist 5 at a time
 function displaySongs(data) {
   for (let i = 0; i < 5; i++) {
     const playlist = data.tracks.items.length;
@@ -235,7 +248,7 @@ function displayWeather(event) {
   }
 }
 
-// Get the current weather conditions by city
+// Get the current weather conditions by city and place them on the page
 function currentWeather(city) {
   var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
   $.ajax({
@@ -350,6 +363,7 @@ function pickWeatherSong(response) {
   }
 }
 
+// My handlers
 $("#searchButton").on("click", displayWeather);
 $(document).on("click", pastSearch);
 $(window).on("load", previousCity);
