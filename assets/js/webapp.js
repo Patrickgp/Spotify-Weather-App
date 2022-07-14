@@ -78,6 +78,7 @@ function handleAuthorizationResponse() {
   } else {
     console.log(this.responseText);
     alert(this.responseText);
+    // This alert is for testing the end user should never see this
   }
 }
 
@@ -133,6 +134,7 @@ function pickPlaylist(playlistIdentifier) {
     } else {
       console.log(this.responseText);
       alert(this.responseText);
+      // This alert is for testing the end user should never see this
     }
   }
 
